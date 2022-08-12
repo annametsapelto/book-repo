@@ -28,8 +28,20 @@ public class BookController {
     }
 
     @GetMapping("/get/{id}")
-    public Optional<Book> getBook(Integer id) {
+    public Optional<Book> getBook(@PathVariable Integer id) {
         return bookService.getBookById(id);
     }
+
+    @PutMapping("book/{id}")
+    public Book updateBook(@RequestBody Book newBook, @PathVariable Integer id) {
+        return bookService.updateBook(newBook, id);
+    }
+
+    @DeleteMapping("book/{id}")
+    public String delete(@PathVariable Integer id) {
+        bookService.delete(id);
+        return "Removed book with id " + id;
+    }
+
 
 }

@@ -13,4 +13,6 @@ public interface BookService {
     public Optional<Book> getBookById(Integer id);
 
     public String delete(Integer id);
+
+    public Book updateBook(Book newBook, Integer id);
 }
