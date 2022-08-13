@@ -1,0 +1,8 @@
+.bookList ul {
+    list-style-type: none;
+}
+
+.bookList li:hover {
+    color: navy;
+    cursor: pointer;
+}

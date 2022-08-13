@@ -5,9 +5,9 @@ import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 
 function AddBook({add}) {
-    const [title, setTitle] = useState('');
+    const [book, setBook] = useState('');
     const [author, setAuthor] = useState('');
-    const [description, setDescription] = useState('');
+    const [descr, setDescr] = useState('');
     const [validated, setValidated] = useState(true);
 
     const paperStyle={
@@ -23,20 +23,23 @@ function AddBook({add}) {
     const handleClick = (event) => {
         event.preventDefault();
         if (validateData) {
-            const book={title, author, description};
+            const newBook={book, author, descr};
             fetch("http://localhost:8080/book/addBook", {
                 method:"POST", 
                 headers:{"Content-Type":"application/json"},
-                body:JSON.stringify(book)
+                body:JSON.stringify(newBook)
             }
             ).then(()=> {
+                setBook('');
+                setAuthor('');
+                setDescr('');
                 console.log("New book was added");
             })
         }
     }
 
     const validateData = ()=> {
-        if (title.length > 1 || author.length > 1 || description.length > 1) {
+        if (book.length > 1 || author.length > 1 || descr.length > 1) {
             setValidated(true)
             return true;
         }
@@ -50,9 +53,9 @@ function AddBook({add}) {
             <Paper elevation={2} style={paperStyle}>   
             <h2>Add Your Book Here</h2>         
                 <form>
-                <TextField value={title} onChange={(event) => setTitle(event.target.value)} id="outlined-basic" label="Book Title" variant="outlined" style={fieldStyle} fullWidth/><br></br>
+                <TextField value={book} onChange={(event) => setBook(event.target.value)} id="outlined-basic" label="Book Title" variant="outlined" style={fieldStyle} fullWidth/><br></br>
                 <TextField value={author} onChange={(event) => setAuthor(event.target.value)}id="outlined-basic" label="Author" variant="outlined" style={fieldStyle} fullWidth/><br></br>
-                <TextField value={description} onChange={(event) => setDescription(event.target.value)}id="outlined-basic" label="Description" variant="outlined" style={fieldStyle} fullWidth/><br></br>
+                <TextField value={descr} onChange={(event) => setDescr(event.target.value)}id="outlined-basic" label="Description" variant="outlined" style={fieldStyle} fullWidth/><br></br>
                 <Button variant="outlined" color="primary" onClick={() => add()}>Cancel</Button>
                 <Button variant="contained" color="primary" onClick={handleClick}>Save</Button>
             </form>
