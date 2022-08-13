@@ -11,6 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/book")
+@CrossOrigin
 @SpringBootApplication(scanBasePackages = "com.anna.bookrepo.service")
 public class BookController {
     @Autowired

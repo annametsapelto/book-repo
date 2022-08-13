@@ -24,6 +24,14 @@ function AddBook({add}) {
         event.preventDefault();
         if (validateData) {
             const book={title, author, description};
+            fetch("http://localhost:8080/book/addBook", {
+                method:"POST", 
+                headers:{"Content-Type":"application/json"},
+                body:JSON.stringify(book)
+            }
+            ).then(()=> {
+                console.log("New book was added");
+            })
         }
     }
 
