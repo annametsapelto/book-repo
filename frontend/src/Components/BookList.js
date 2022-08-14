@@ -4,26 +4,17 @@ import './List.css';
 import BookDetail from './BookDetail';
 
 
-function BookList() {
-    const [books, setBooks] = useState([]);
+function BookList({getBooks, books}) {
     const [showDetail, setShowDetail] = useState(false);
+    const [selectedBook, setSelectedBook] = useState(null);
 
 useEffect(() => {
     getBooks();
-    const interval=setInterval(() => {
-        getBooks()
-    }, 10000)
-    return()=>clearInterval(interval);
 }, [])
 
-function getBooks() {
-        fetch("http://localhost:8080/book/getAll")
-    .then(res => res.json())
-    .then(result => setBooks(result));
-}
-
-function showBookDetail() {
+function showBookDetail(clickedBook) {
     setShowDetail(!showDetail);
+    setSelectedBook(clickedBook);
 }
 
 const paperStyle={
@@ -38,10 +29,10 @@ const paperStyle={
                 <Paper elevation={2} style={paperStyle}>
                 {books.map(book =>(
                     <ul>
-                        <li key={book.id} onClick={(e) => showBookDetail()}>{book.book} by {book.author}
-                        {showDetail && 
+                        <li key={book.id} onClick={() => showBookDetail(book)}>{book.book} by {book.author}
+                        {showDetail && selectedBook === book &&
                             <div>
-                                <BookDetail showBookDetail={showBookDetail} book={book}></BookDetail>
+                                <BookDetail showBookDetail={showBookDetail} book={selectedBook} getBooks={getBooks}></BookDetail>
                             </div>}
                         </li>
                     </ul>

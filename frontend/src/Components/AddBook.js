@@ -4,7 +4,7 @@ import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 
-function AddBook({add}) {
+function AddBook({add, getBooks}) {
     const [book, setBook] = useState('');
     const [author, setAuthor] = useState('');
     const [descr, setDescr] = useState('');
@@ -34,6 +34,8 @@ function AddBook({add}) {
                 setAuthor('');
                 setDescr('');
                 console.log("New book was added");
+                getBooks();
+                add();
             })
         }
     }

@@ -38,7 +38,7 @@ public class BookController {
         return bookService.updateBook(newBook, id);
     }
 
-    @DeleteMapping("book/{id}")
+    @DeleteMapping("delete/{id}")
     public String delete(@PathVariable Integer id) {
         bookService.delete(id);
         return "Removed book with id " + id;
