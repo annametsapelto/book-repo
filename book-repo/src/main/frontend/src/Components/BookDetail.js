@@ -14,7 +14,6 @@ function BookDetail({book, showBookDetail, getBooks}) {
 
         <div>        
             <p>{book.descr}</p>
-            <Button variant="outlined" color="primary">Modify</Button>
             <Button variant="outlined" color="primary" onClick={() => deleteBook(book.id)}>Delete</Button>
             <Button onClick={(e) => showBookDetail()} variant="outlined" color="primary">Close</Button>
     </div>)
