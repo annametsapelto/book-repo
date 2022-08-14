@@ -35,8 +35,9 @@ public class BookServiceImpl implements BookService{
     }
 
     @Override
-    public Book updateBook(Book newBook, Integer id) {
-        return null;
+    public Book updateBook(Book newBook) {
+        return repo.save(newBook);
+
     }
 
 }
